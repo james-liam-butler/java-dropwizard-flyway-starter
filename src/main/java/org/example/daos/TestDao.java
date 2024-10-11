@@ -14,10 +14,15 @@ public class TestDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
-            System.out.println("Retrieving database name");
+            long start = System.currentTimeMillis();
 
             ResultSet resultSet = statement.executeQuery(
                     "SHOW DATABASES;");
+
+            long end = System.currentTimeMillis();
+
+            System.out.println("Total time to execute show database query in milliseconds: " + (end - start));
+
 
             while (resultSet.next()) {
                 System.out.println(resultSet.getString("Database"));
